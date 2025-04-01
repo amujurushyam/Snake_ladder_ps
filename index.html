@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ludo Game</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f5f5f5;
+      }
+
+      .ludo-board {
+        margin-top: 30px;
+      }
+
+      .box {
+        height: 100px;
+        background-color: #dcdcdc;
+        margin: 5px;
+        position: relative;
+      }
+
+      .home {
+        background-color: lightgray;
+      }
+
+      .home-zone {
+        position: absolute;
+        width: 80%;
+        height: 80%;
+        top: 10%;
+        left: 10%;
+        background-color: white;
+        border-radius: 10px;
+      }
+
+      .red {
+        background-color: red;
+      }
+
+      .green {
+        background-color: green;
+      }
+
+      .blue {
+        background-color: blue;
+      }
+
+      .yellow {
+        background-color: yellow;
+      }
+
+      .piece {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+      }
+
+      .red-piece {
+        background-color: red;
+      }
+
+      .green-piece {
+        background-color: green;
+      }
+
+      .blue-piece {
+        background-color: blue;
+      }
+
+      .yellow-piece {
+        background-color: yellow;
+      }
+
+      button {
+        margin-top: 10px;
+      }
+
+      .dice {
+        font-size: 50px;
+        margin: 20px 0;
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-center my-4">Ludo Game</h1>
+
+      <div class="ludo-board">
+        <div class="row">
+          <div class="col-3">
+            <div class="box home red">
+              <div class="home-zone"></div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="box green"></div>
+          </div>
+          <div class="col-3">
+            <div class="box home blue">
+              <div class="home-zone"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <div class="box yellow"></div>
+          </div>
+          <div class="col-6">
+            <div class="box"></div>
+          </div>
+          <div class="col-3">
+            <div class="box yellow"></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <div class="box home green">
+              <div class="home-zone"></div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="box red"></div>
+          </div>
+          <div class="col-3">
+            <div class="box home yellow">
+              <div class="home-zone"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button class="btn btn-primary my-3" onclick="startGame()">
+          Start Game
+        </button>
+        <button class="btn btn-secondary my-3" onclick="rollDice()">
+          Roll Dice
+        </button>
+      </div>
+
+      <div class="text-center">
+        <button class="dice" onclick="rollDice()">Roll Dice</button>
+        <div id="dice-result">Result:</div>
+      </div>
+
+      <div class="text-center">
+        <div
+          class="piece red-piece"
+          id="red-piece"
+          style="top: 70px; left: 70px"
+        ></div>
+        <div
+          class="piece green-piece"
+          id="green-piece"
+          style="top: 70px; left: 170px"
+        ></div>
+        <div
+          class="piece blue-piece"
+          id="blue-piece"
+          style="top: 170px; left: 70px"
+        ></div>
+        <div
+          class="piece yellow-piece"
+          id="yellow-piece"
+          style="top: 170px; left: 170px"
+        ></div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      let diceResult = 0;
+      let isGameStarted = false;
+
+      // Roll the dice and display result
+      function rollDice() {
+        if (!isGameStarted) {
+          alert("Please start the game first!");
+          return;
+        }
+
+        diceResult = Math.floor(Math.random() * 6) + 1;
+        document.getElementById("dice-result").innerHTML =
+          "Result: " + diceResult;
+        movePiece(diceResult);
+      }
+
+      // Start the game
+      function startGame() {
+        isGameStarted = true;
+        alert("Game Started! Roll the dice to begin.");
+      }
+
+      // Function to move pieces based on dice result
+      function movePiece(dice) {
+        // Move the red piece as an example
+        let redPiece = document.getElementById("red-piece");
+        let currentLeft = parseInt(redPiece.style.left);
+        redPiece.style.left = currentLeft + dice * 20 + "px"; // Move piece horizontally
+      }
+    </script>
+  </body>
+</html>
